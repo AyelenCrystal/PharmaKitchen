@@ -24,8 +24,10 @@ const dbConfig = {useNewParser: true, useUnifiedTopology: true, family: 4};
 const dbName = "InventarioPharma";
 
 app.get("/home",(res, req) =>{
-    
-})
+    res.render("/home", {
+        title: "Index"
+    });
+});
 
 
 
@@ -36,36 +38,6 @@ app.get("/home",(res, req) =>{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-app.listen(4000, function(){
-    console.log("Escuchando Puerto 4000-Primera Prueba");
+app.listen(4100, function(){
+    console.log("Escuchando Puerto 4100-Segunda Prueba");
 });
