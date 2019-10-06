@@ -11,6 +11,7 @@ const dbName = "InventarioPharma";
 
 
 app.use(express.static(path.join(__dirname,"Client")));
+app.use(express.static(path.join(__dirname,"Images")));
 
 
 app.engine("handlebars", exphbs({

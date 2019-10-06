@@ -4,14 +4,27 @@
     font-family: 'Ubuntu', sans-serif;
 }
 
-
-
-
-#footer {
-    background-color: darkblue;
+.col-lg-3 {
+    display: inline-block;
+    position: relative;
 }
 
 .data {
+    padding: 30px 20px;
+}
+
+.reference {
     color: white;
-    font: 1em sans-serif;
+}
+
+.user {
+    padding-left: 450px;
+    display: grid;
+    text-align: right;
+}
+
+
+footer {
+    background-color: #414042;
+    color: white;
 }
