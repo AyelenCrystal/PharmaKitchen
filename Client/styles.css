@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+
+
+#footer {
+    background-color: darkblue;
+}
+
+.data {
+    color: white;
+    font: 1em sans-serif;
+}
