@@ -9,11 +9,21 @@
     <title>{{{title}}}</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-        <div>Bienvenido {{{user}}}</div> 
-        <div class="top-bar"><a class="logout" href="/logout">Logout</a></div>
-    </nav>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+            <a class="navbar-brand" href="main.handlebars">
+                <img src="Images/logotipo.png"/>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div>Bienvenido {{{user}}}</div> 
+            <div class="top-bar"><a class="logout" href="/logout">Logout</a></div>
+        </nav>
+    </header>
+   
     {{{body}}}
+    
     <footer>
         <div class="data">
             <p>Website powered by Prisma Sotfware feat <a class="reference" href="https://github.com/AyelenCrystal">Ayelen Ferreyra</a></p>
