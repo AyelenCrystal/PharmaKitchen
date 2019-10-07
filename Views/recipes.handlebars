@@ -1,0 +1,35 @@
+<article>
+    <form>
+        <div class="form-group">
+        <label for="formGroup">Busca entre cientos de Recetas Magistrales </label>
+        <input type="text" class="form-control" id="formGroup" placeholder="Buscador">
+        </div>
+        
+        <button type="button" class="btn btn-info">Buscar</button>
+    </form>
+
+    {{#if listaRecetas.length }}
+        {{#each listaRecetas}}
+        <div class="jumbotron" id="Recetario">
+            <h2>Nombre: {{this.Producto}}</h2>
+            <ul>
+                <li>Reactivos: {{this.Reactivos}}</li>
+                <li>Material: {{this.Material}}</li>
+                <li>Procedimiento:</li> 
+                    <p>{{this.Procedimiento}} </p>
+                <li>Usos: {{this.Usos}}    </li>
+            </ul>
+        </div>
+        {{/each}}
+    {{else}}
+        <h2>No se encuentra la receta</h2>
+    {{/if}}
+
+
+
+
+
+
+
+
+</article>

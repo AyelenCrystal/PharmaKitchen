@@ -27,15 +27,15 @@ app.get("/home", function(req, res) {
     });
 });
 
+app.get("/recipes", function(req, res){
+    
+})
 
 
 
 
 
 
-
-
-
-app.listen(4500, function(){
-    console.log("Escuchando Puerto 4500-El server se volvio loco");
+app.listen(5000, function(){
+    console.log("Escuchando Puerto 5000-Ahora con buscador de recetas magistrales");
 });
