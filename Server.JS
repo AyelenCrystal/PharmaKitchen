@@ -1,6 +1,5 @@
 const express = require ("express");
 const path = require (`path`);
-const app = express();
 const expressSession = require ("express-session");
 const exphbs = require ("express-handlebars");
 const mongodb = require ("mongodb");
@@ -8,6 +7,15 @@ const MongoClient = mongodb.MongoClient;
 const dbUrl = "localhost:27017";
 const dbConfig = {useNewUrlParser: true, useUnifiedTopology: true, family: 4};
 const dbName = "Farmacia";
+
+const app = express();
+
+app.use(expressSession({
+    secret: "Somewhere Only We Know",
+    resave: false,
+    saveUninitialized: false
+}));
+
 
 
 app.use(express.static(path.join(__dirname,"Client")));
@@ -22,10 +30,84 @@ app.set(`view engine`, "handlebars")
 app.set(`Views`, path.join(__dirname, `Views/Layout`));
 
 app.get("/", function(req, res){
-    res.render("login", {
-        title: "Login - Pharma Kitchen"
+    if (req.session.user){
+        res.render("home", {
+            user: req.session.user,
+            title:"Index"
+        });
+    } else {
+        res.render("login", {
+            title: "Login - Pharma Kitchen"
+        });
+    }
+});
+
+app.post("/login", function(req, res){
+    if (req.body.usuario && req.body.clave) {
+        validateUser(req.body.usuario, req.body.clave, result => {
+            if (result) {
+                req.body.usuario = req.session.user;
+                res.render("/home",{
+                    user: req.session.user,
+                    title:"Index"
+                });
+            } else {
+                req.session.destroy();
+                res.render("/login", {
+                    mensajeError: "Usuario y/o clave incorrecta",
+                    tipo: `fail`
+                });
+
+            }
+
+        });
+    } else {
+        req.session.destroy();
+        res.render("/login", {
+            mensajeError: "Usuario y/o clave incorrecta",
+            tipo: `fail`
+        });
+    }
+});
+
+app.get("/logout", function(req, res){
+    req.session.destroy();
+    res.render("/login", {
+        title:"Login-Pharma Kitchen",
     });
 });
+
+function validateUser(user, pwd, callback) {
+    MongoClient.connect(dbUrl, dbConfig, (fail, client) =>{
+        const users = client.db("Farmacia").collection("Usuarios");
+
+        users.findOne({user, pwd}, (fail, client)=>{
+            if (user) {
+
+            }
+        });
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get("/home", function(req, res) {
     res.render("home", {
@@ -42,7 +124,7 @@ app.get("/recipes", function(req, res){
             var filter = {};
             if (req.query.recetas) filter.Recetas = req.query.recetas;
 
-            recetas.find(filter).toArray((fail, recipes) =>{
+            recetas.findOne(filter).toArray((fail, recipes) =>{
                 client.close();
                 res.render("recipes",{
                     listaRecetas: recetas,
@@ -76,6 +158,6 @@ app.get("/products", function(req, res){
 
 
 
-app.listen(5200, function(){
-    console.log("Listening Local Host 5200-The CSS is so fucking weird");
+app.listen(5300, function(){
+    console.log("Listening Local Host 5300-Welcome to South Park");
 });
