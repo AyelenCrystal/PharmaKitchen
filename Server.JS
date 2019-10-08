@@ -1,13 +1,13 @@
 const express = require ("express");
 const path = require (`path`);
 const app = express();
-//const expressSession = require ("express-session");
+const expressSession = require ("express-session");
 const exphbs = require ("express-handlebars");
 const mongodb = require ("mongodb");
 const MongoClient = mongodb.MongoClient;
 const dbUrl = "localhost:27017";
-const dbConfig = {useNewParser: true, useUnifiedTopology: true, family: 4};
-const dbName = "InventarioPharma";
+const dbConfig = {useNewUrlParser: true, useUnifiedTopology: true, family: 4};
+const dbName = "Farmacia";
 
 
 app.use(express.static(path.join(__dirname,"Client")));
@@ -21,6 +21,12 @@ app.engine("handlebars", exphbs({
 app.set(`view engine`, "handlebars")
 app.set(`Views`, path.join(__dirname, `Views/Layout`));
 
+app.get("/", function(req, res){
+    res.render("login", {
+        title: "Login - Pharma Kitchen"
+    });
+});
+
 app.get("/home", function(req, res) {
     res.render("home", {
         title: "Index"
@@ -28,14 +34,48 @@ app.get("/home", function(req, res) {
 });
 
 app.get("/recipes", function(req, res){
-    
-})
+    MongoClient.connect(dbUrl, dbConfig,(fail, client) =>{
+        if (!fail) {
+            const Farmacia = client.db(dbName);
+            const recetas = Farmacia.collection("Recetas");
+
+            var filter = {};
+            if (req.query.recetas) filter.Recetas = req.query.recetas;
+
+            recetas.find(filter).toArray((fail, recipes) =>{
+                client.close();
+                res.render("recipes",{
+                    listaRecetas: recetas,
+                    title: "Recetas Magistrales"
+                });
+            }); 
+        } else {
+            res.render("error",{
+                mensajeError: fail
+            });
+        };   
+    });
+});
+
+app.get("/elements", function(req, res){
+    MongoClient.connect(dbUrl, dbConfig,(fail, client)=>{
+        if(!fail) {
+            res.render ("elements", {
+                title: "Reactivos"
+            });
+        } 
+    });
+});
+
+
+app.get("/products", function(req, res){
+    res.render("products",{
+        title: "Productos"
+    });
+});
 
 
 
-
-
-
-app.listen(5000, function(){
-    console.log("Escuchando Puerto 5000-Ahora con buscador de recetas magistrales");
+app.listen(5200, function(){
+    console.log("Listening Local Host 5200-The CSS is so fucking weird");
 });

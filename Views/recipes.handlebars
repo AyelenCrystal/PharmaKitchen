@@ -1,17 +1,16 @@
 <article>
     <form>
         <div class="form-group">
-        <label for="formGroup">Busca entre cientos de Recetas Magistrales </label>
-        <input type="text" class="form-control" id="formGroup" placeholder="Buscador">
+            <label for="formGroup">Busca entre cientos de Recetas Magistrales </label>
+            <input type="text" class="form-control" id="formGroup" placeholder="Buscador">
+            <button type="button" class="btn btn-info" onclick="Search()">Buscar</button>
         </div>
-        
-        <button type="button" class="btn btn-info">Buscar</button>
     </form>
 
     {{#if listaRecetas.length }}
-        {{#each listaRecetas}}
+    {{#each listaRecetas}}
         <div class="jumbotron" id="Recetario">
-            <h2>Nombre: {{this.Producto}}</h2>
+            <h2>Nombre: {{this.Nombre}}</h2>
             <ul>
                 <li>Reactivos: {{this.Reactivos}}</li>
                 <li>Material: {{this.Material}}</li>
@@ -20,10 +19,26 @@
                 <li>Usos: {{this.Usos}}    </li>
             </ul>
         </div>
-        {{/each}}
+    {{/each}}
+    
     {{else}}
-        <h2>No se encuentra la receta</h2>
+
+        <h2>No se encuentra la receta buscada</h2>
+    
     {{/if}}
+
+    <script>
+        function Search() {
+            let url = "/recipes?"
+            let recetas = document.getElementById("recetas").value;
+
+            if (recetas){
+                url += "recetas" + recetas;
+            }
+            location = url;
+        }
+        
+    </script>
 
 
 

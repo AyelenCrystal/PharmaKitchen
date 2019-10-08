@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login - PharmaKitchen</title>
-</head>
+{{#if mensaje}}
+<p class="mensaje mensaje-{{tipo}}">{{mensaje}}</p>
+{{/if}}
+
 <body>
     <form action="/login" method="post">
         <div class="form-group">
@@ -16,7 +12,7 @@
             <label for="exampleInputPassword1">Contraseña</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-primary">Entrar</button>
+        <button type="submit" class="btn btn-info">Entrar</button>
     </form>
 </body>
 </html>
