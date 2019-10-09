@@ -1,5 +1,6 @@
 const express = require ("express");
 const path = require (`path`);
+const bodyParser = require(`body-parser`);
 const expressSession = require ("express-session");
 const exphbs = require ("express-handlebars");
 const mongodb = require ("mongodb");
@@ -16,7 +17,7 @@ app.use(expressSession({
     saveUninitialized: false
 }));
 
-
+app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(express.static(path.join(__dirname,"Client")));
 app.use(express.static(path.join(__dirname,"Images")));
@@ -82,32 +83,19 @@ function validateUser(user, pwd, callback) {
         const users = client.db("Farmacia").collection("Usuarios");
 
         users.findOne({user, pwd}, (fail, client)=>{
+            client.close();
             if (user) {
-
+                if (user.password == pwd) {
+                    callback(true);
+                } else {
+                    callback(false);
+                }
+            } else {
+                callback(false);
             }
         });
     });
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 app.get("/home", function(req, res) {
     res.render("home", {
@@ -155,7 +143,6 @@ app.get("/products", function(req, res){
         title: "Productos"
     });
 });
-
 
 
 app.listen(5300, function(){

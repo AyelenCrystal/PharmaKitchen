@@ -8,10 +8,12 @@
     </tr>
   </thead>
   <tbody>
+  {{#each listaReactivos}}
     <tr class="table-active">
       <th scope="row">{{{this.Reactivo}}}</th>
       <td> {{{this.Cantidad}}}</td>
       <td> {{{this.Forma}}}</td>
     </tr>
+  {{/each}}
   </tbody>
 </table> 
