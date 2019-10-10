@@ -44,17 +44,17 @@ app.get("/", function(req, res){
 });
 
 app.post("/login", function(req, res){
-    if (req.body.usuario && req.body.clave) {
-        validateUser(req.body.usuario, req.body.clave, result => {
+    if (req.body.user && req.body.password) {
+        validateUser(req.body.user, req.body.clave, result => {
             if (result) {
-                req.body.usuario = req.session.user;
-                res.render("/home",{
+                req.session.user = req.body.user
+                res.render("home",{
                     user: req.session.user,
                     title:"Index"
                 });
             } else {
                 req.session.destroy();
-                res.render("/login", {
+                res.render("login", {
                     mensajeError: "Usuario y/o clave incorrecta",
                     tipo: `fail`
                 });
@@ -64,7 +64,7 @@ app.post("/login", function(req, res){
         });
     } else {
         req.session.destroy();
-        res.render("/login", {
+        res.render("login", {
             mensajeError: "Usuario y/o clave incorrecta",
             tipo: `fail`
         });
@@ -73,27 +73,31 @@ app.post("/login", function(req, res){
 
 app.get("/logout", function(req, res){
     req.session.destroy();
-    res.render("/login", {
+    res.render("login", {
         title:"Login-Pharma Kitchen",
     });
 });
 
 function validateUser(user, pwd, callback) {
     MongoClient.connect(dbUrl, dbConfig, (fail, client) =>{
-        const users = client.db("Farmacia").collection("Usuarios");
-
-        users.findOne({user, pwd}, (fail, client)=>{
-            client.close();
-            if (user) {
-                if (user.password == pwd) {
-                    callback(true);
+        if (!fail) {
+            const users = client.db("Farmacia").collection("Usuarios");
+        
+            users.findOne({user: user, password: pwd}, (fail, consult)=>{
+                client.close();
+                if(!fail) {
+                    if (consult) {
+                        callback(true);
+                    } else {
+                        callback(false);
+                    }
                 } else {
                     callback(false);
                 }
-            } else {
-                callback(false);
-            }
-        });
+            });
+        } else {
+            callback(false);
+        }     
     });
 };
 
@@ -120,7 +124,7 @@ app.get("/recipes", function(req, res){
                 });
             }); 
         } else {
-            res.render("error",{
+            res.render("recipes",{
                 mensajeError: fail
             });
         };   
@@ -145,6 +149,6 @@ app.get("/products", function(req, res){
 });
 
 
-app.listen(5300, function(){
-    console.log("Listening Local Host 5300-Welcome to South Park");
+app.listen(5400, function(){
+    console.log("Escucho el puerto 5400 mientras me pregunto porque no paro de fracasar");
 });

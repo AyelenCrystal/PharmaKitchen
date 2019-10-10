@@ -14,4 +14,5 @@ Products:
 Recipes:
     *No aparece vista de error
     *Estilado
+    *No hace busqueda
     
