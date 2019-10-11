@@ -65,7 +65,7 @@ app.post("/login", function(req, res){
     } else {
         req.session.destroy();
         res.render("login", {
-            mensajeError: "Usuario y/o clave incorrecta",
+            mensaje: "Usuario y/o clave incorrecta",
             tipo: `fail`
         });
     }
@@ -119,13 +119,13 @@ app.get("/recipes", function(req, res){
             recetas.findOne(filter).toArray((fail, recipes) =>{
                 client.close();
                 res.render("recipes",{
-                    listaRecetas: recetas,
+                    listaRecetas: recipes,
                     title: "Recetas Magistrales"
                 });
             }); 
         } else {
             res.render("recipes",{
-                mensajeError: fail
+                mensaje: fail
             });
         };   
     });
@@ -134,17 +134,34 @@ app.get("/recipes", function(req, res){
 app.get("/elements", function(req, res){
     MongoClient.connect(dbUrl, dbConfig,(fail, client)=>{
         if(!fail) {
-            res.render ("elements", {
-                title: "Reactivos"
+            const Farmacia = client.db(dbName);
+            const elements = Farmacia.collection("Reactivos");
+
+            var filter = {};
+            recetas.find(filter).toArray((fail, elements) =>{
+                client.close();
+                res.render ("elements", {
+                    title: "Reactivos",
+                    Reactivo : req.body.reactivos,
+                    Cantidad : parseInt(req.body.cantidad),
+                    Forma : req.body.forma
+                });
             });
-        } 
-    });
+        } else {
+            res.render ("elements", {
+                mensaje: fail
+            });
+        }
+    });     
 });
 
 
+
 app.get("/products", function(req, res){
+
     res.render("products",{
         title: "Productos"
+
     });
 });
 

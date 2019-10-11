@@ -4,12 +4,35 @@
     font-family: 'Ubuntu', sans-serif;
 }
 
+.mensaje {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 40px;
+    font-size: xx-large;
+    color: red;
+}
+
 .col-lg-3 {
     display: inline-block;
     position: relative;
-    padding-right: 10px;
-    padding-left: 40px;
+    margin-top: 80px;
+    margin-bottom: 75px;
 }
+
+#elements {
+    margin-left: 70px;
+    margin-right: 40px;
+}
+
+#products{
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+#recipes{
+    margin-left: 40px;
+    margin-right: 70px;
+} 
 
 .data {
     padding: 30px 20px;
@@ -30,6 +53,7 @@
 footer {
     background-color: #414042;
     color: white;
+    height: 158px;
 }
 
 a:hover {
@@ -45,6 +69,24 @@ a:hover {
     text-align: right;
 }
 
-#naver {
+#insColor {
     background-color: #006699
+}
+
+.loginForm {
+    border-color: aqua;
+    padding: 20px;
+    background-color: white;
+    color: black;
+}
+
+header {
+    border: 1px;
+    color: black;
+    border-style: solid;
+}
+
+section {
+    background-image: url(fondo3.png);
+    padding-bottom: 20px;
 }
