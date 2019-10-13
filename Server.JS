@@ -5,7 +5,7 @@ const expressSession = require ("express-session");
 const exphbs = require ("express-handlebars");
 const mongodb = require ("mongodb");
 const MongoClient = mongodb.MongoClient;
-const dbUrl = "localhost:27017";
+const dbUrl = "mongodb://localhost:27017";
 const dbConfig = {useNewUrlParser: true, useUnifiedTopology: true, family: 4};
 const dbName = "Farmacia";
 
@@ -116,16 +116,18 @@ app.get("/recipes", function(req, res){
             var filter = {};
             if (req.query.recetas) filter.Recetas = req.query.recetas;
 
+
             recetas.findOne(filter).toArray((fail, recipes) =>{
                 client.close();
                 res.render("recipes",{
+                    selected : {recetas: true},
                     listaRecetas: recipes,
                     title: "Recetas Magistrales"
                 });
             }); 
         } else {
-            res.render("recipes",{
-                mensaje: fail
+            res.render("fail",{
+                mensajeError: fail
             });
         };   
     });
@@ -138,7 +140,8 @@ app.get("/elements", function(req, res){
             const elements = Farmacia.collection("Reactivos");
 
             var filter = {};
-            recetas.find(filter).toArray((fail, elements) =>{
+
+            elements.find(filter).toArray((fail, elements) =>{
                 client.close();
                 res.render ("elements", {
                     title: "Reactivos",
@@ -148,24 +151,51 @@ app.get("/elements", function(req, res){
                 });
             });
         } else {
-            res.render ("elements", {
-                mensaje: fail
+            res.render ("fail", {
+                mensajeError: fail
             });
         }
     });     
 });
 
 
-
 app.get("/products", function(req, res){
 
     res.render("products",{
         title: "Productos"
-
     });
 });
 
+app.get("/newProduct", function(req, res){
+    res.render("newProduct",{
+        title: "Nuevo Producto"
+    });
+});
+
+app.post("/newProduct", function(req, res){
+    MongoClient.connect(dbUrl, dbConfig, function(fail, db){
+        var Product = db.collection("Productos");
+
+        const Product = {
+            nombre: req.body.nombre,
+            cantidad: parseInt(req.body.cantidad),
+            forma: req.body.forma
+        };
+
+        Product.insertOne(Product, function(fail, newProduct){
+            if (!fail){
+                res.render("newProduct",{
+                    mensaje: "Producto Agregado"
+                })
+            } else {
+                res.render("fail",{
+                    mensajeError: "Error en la carga de datos"
+                })
+            }
+        });
+    });
+});
 
 app.listen(5400, function(){
-    console.log("Escucho el puerto 5400 mientras me pregunto porque no paro de fracasar");
+    console.log("Sigo agregando cosas locas al puerto 5400. Ya perdi la fé con el profesor");
 });

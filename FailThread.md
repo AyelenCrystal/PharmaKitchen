@@ -1,7 +1,5 @@
 Pantalla de Login:
-    * Aparecen los dos nav
     * Error de servidor ante login
-    * Estilado de pantalla
 Home:
     *Reubicar div de user y logout.
     *Cambiar los iconos de los botones
@@ -14,6 +12,5 @@ Products:
     *Estilado
 Recipes:
     *No aparece vista de error
-    *Estilado
     *No hace busqueda
     

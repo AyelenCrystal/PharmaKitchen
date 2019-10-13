@@ -11,7 +11,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg" id="insColor" ><!--style="height: 136px;"-->
-        <a class="navbar-brand" href="main"><img src="logotipo2.png"/></a>
+        <a class="navbar-brand" href="home"><img src="logotipo2.png"/></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,7 +20,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     {{#if mensaje}}
-                    <p class="initial mensaje-{{tipo}}">Bienvenido  {{user}}</p>
+                    <p class="mensaje-{{tipo}}">Bienvenido {{user}}</p>
                     <a class="logout" href="logout">Logout</a>
                     {{/if}}
                 </li>

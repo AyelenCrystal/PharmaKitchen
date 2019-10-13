@@ -1,9 +1,9 @@
-<article>
+<article id="search">
     <form>
         <div class="form-group">
-            <label for="formGroup">Busca entre cientos de Recetas Magistrales </label>
-            <input type="text" class="form-control" id="formGroup" placeholder="Buscador">
-            <button type="button" class="btn btn-info" id="insColor" onclick="Search()">Buscar</button>
+            <label for="formGroup" style="margin-botton: 10px;"><h3>Busca entre cientos de Recetas Magistrales y Sintesis Quimicas</h3>            </label>
+            <input type="text" class="form-control" id="formGroup" placeholder="Buscador" style="margin-bottom: 10px;">
+            <button type="button" class="btn btn-info" id="insColor" style="margin-top: 15px;" onclick="Search()">Buscar</button>
         </div>
     </form>
 
@@ -16,7 +16,7 @@
                 <li>Material: {{this.Material}}</li>
                 <li>Procedimiento:</li> 
                     <p>{{this.Procedimiento}} </p>
-                <li>Usos: {{this.Usos}}    </li>
+                <li>Usos: {{this.Usos}} </li>
             </ul>
         </div>
     {{/each}}
