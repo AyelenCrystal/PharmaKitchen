@@ -1,23 +1,28 @@
-<form>
+{{#if mensaje}}
+  <div class="success">{{mensaje}}</div>
+{{/if}}
+
+<form class="new" action="/newElement" method="POST">
   <fieldset>
     <legend>Nuevo Reactivo</legend>
     <div class="form-group">
-      <label for="nombre">Nombre</label>
-      <input type="text" class="form-control">
+      <label for="nombre">Reactivo</label>
+      <input type="text" class="form-control" name="reactivo" id="reactivo" required>
     </div>
     <div class="form-group">
       <label for="cantidad">Cantidad</label>
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" name="cantidad" id="cantidad" required>
     </div>
     <div class="form-group">
-      <label for="forma">Forma Farmacologica</label>
-      <select class="custom-select">
+      <label for="forma">Forma</label>
+      <select class="custom-select" name="forma" id="forma" required>
         <option selected="">Elegir</option>
-        <option>Jarabe/Liquido</option>
-        <option>Crema/Emulsión</option>
-        <option>Pastilla/Comprimido</option>
+        <option>Liquido</option>
+        <option>Polvo</option>
+        <option>Granas/Cristales</option>
       </select>
     </div>
   </fieldset>
   <button type="submit" class="btn" id="insColor">Guardar</button>
+  <a type="submit" class="btn btn-link" id="insColor" href="elements">Cerrar</a> 
 </form>

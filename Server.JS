@@ -3,11 +3,17 @@ const path = require (`path`);
 const bodyParser = require(`body-parser`);
 const expressSession = require ("express-session");
 const exphbs = require ("express-handlebars");
-const mongodb = require ("mongodb");
-const MongoClient = mongodb.MongoClient;
-const dbUrl = "mongodb://localhost:27017";
-const dbConfig = {useNewUrlParser: true, useUnifiedTopology: true, family: 4};
-const dbName = "Farmacia";
+const MongoClient = require ("mongodb").MongoClient;
+
+const db = {
+    url: "mongodb://localhost:27017",
+    config: {
+        useNewUrlParser: true, 
+        useUnifiedTopology: true, 
+        family: 4
+    },
+    name: 'Farmacia'
+}
 
 const app = express();
 
@@ -44,10 +50,11 @@ app.get("/", function(req, res){
 });
 
 app.post("/login", function(req, res){
+    console.log('POST /login', 'body:', req.body);
     if (req.body.user && req.body.password) {
-        validateUser(req.body.user, req.body.clave, result => {
+        validateUser(req.body.user, req.body.password, result => {
             if (result) {
-                req.session.user = req.body.user
+                req.session.user = req.body.user;
                 res.render("home",{
                     user: req.session.user,
                     title:"Index"
@@ -79,12 +86,13 @@ app.get("/logout", function(req, res){
 });
 
 function validateUser(user, pwd, callback) {
-    MongoClient.connect(dbUrl, dbConfig, (fail, client) =>{
+    MongoClient.connect(db.url, db.config, (fail, client) =>{
         if (!fail) {
-            const users = client.db("Farmacia").collection("Usuarios");
+            const users = client.db(db.name).collection('Usuarios');
         
             users.findOne({user: user, password: pwd}, (fail, consult)=>{
                 client.close();
+                console.log(consult)
                 if(!fail) {
                     if (consult) {
                         callback(true);
@@ -108,18 +116,16 @@ app.get("/home", function(req, res) {
 });
 
 app.get("/recipes", function(req, res){
-    MongoClient.connect(dbUrl, dbConfig,(fail, client) =>{
+    MongoClient.connect(db.url, db.config, (fail, client) =>{
         if (!fail) {
-            const Farmacia = client.db(dbName);
-            const recetas = Farmacia.collection("Recetas");
+           const recipes = client.db(db.name).collection('Recetas');
 
             var filter = {};
-            if (req.query.recetas) filter.Recetas = req.query.recetas;
+            if (req.query.recetas) filter.recetas = req.query.recetas;
 
-
-            recetas.findOne(filter).toArray((fail, recipes) =>{
+            recipes.find(filter).toArray((fail, recipes) =>{
                 client.close();
-                res.render("recipes",{
+                res.render("recipes", {
                     selected : {recetas: true},
                     listaRecetas: recipes,
                     title: "Recetas Magistrales"
@@ -134,20 +140,16 @@ app.get("/recipes", function(req, res){
 });
 
 app.get("/elements", function(req, res){
-    MongoClient.connect(dbUrl, dbConfig,(fail, client)=>{
+    MongoClient.connect(db.url, db.config,(fail, client)=>{
         if(!fail) {
-            const Farmacia = client.db(dbName);
-            const elements = Farmacia.collection("Reactivos");
+            const elements = client.db('Farmacia').collection('Reactivos');
 
-            var filter = {};
-
-            elements.find(filter).toArray((fail, elements) =>{
+            elements.find().toArray((fail, elements) =>{
                 client.close();
                 res.render ("elements", {
-                    title: "Reactivos",
-                    Reactivo : req.body.reactivos,
-                    Cantidad : parseInt(req.body.cantidad),
-                    Forma : req.body.forma
+                    listaReactivos: elements,
+                    title: "Reactivos"
+                    
                 });
             });
         } else {
@@ -160,10 +162,24 @@ app.get("/elements", function(req, res){
 
 
 app.get("/products", function(req, res){
+    MongoClient.connect(db.url, db.config, (fail, client)=>{
+        if(!fail){
+            const products = client.db('Farmacia').collection('Productos');
 
-    res.render("products",{
-        title: "Productos"
-    });
+            products.find().toArray((fail, products)=>{
+                res.render("products",{
+                    listaProductos: products,
+                    title: "Productos"
+                });
+            })
+        } else {
+            res.render("fail", {
+                title: "Error",
+                mensajeError: fail
+            })
+        }
+
+    })
 });
 
 app.get("/newProduct", function(req, res){
@@ -173,29 +189,59 @@ app.get("/newProduct", function(req, res){
 });
 
 app.post("/newProduct", function(req, res){
-    MongoClient.connect(dbUrl, dbConfig, function(fail, db){
-        var Product = db.collection("Productos");
+    const Product = {
+        Nombre: req.body.nombre,
+        Cantidad: req.body.cantidad.toString(),
+        Forma: req.body.forma
+    };
 
-        const Product = {
-            nombre: req.body.nombre,
-            cantidad: parseInt(req.body.cantidad),
-            forma: req.body.forma
-        };
-
-        Product.insertOne(Product, function(fail, newProduct){
-            if (!fail){
+    MongoClient.connect(db.url, db.config, function(fail, client){
+        if (!fail){
+            const newProduct = client.db('Farmacia').collection('Productos');
+            newProduct.insertOne(Product, function(fail, newProduct){
                 res.render("newProduct",{
+                    listaProductos: newProduct,
                     mensaje: "Producto Agregado"
                 })
-            } else {
-                res.render("fail",{
-                    mensajeError: "Error en la carga de datos"
-                })
-            }
-        });
+            });
+        } else {
+            res.render("fail",{
+                mensajeError: "Error en la carga de datos"
+            })
+        }
     });
 });
 
+app.get("/newElement", function(req, res){
+    res.render("newElement",{
+        title: "Nuevo Reactivo"
+    });
+});
+
+app.post("/newElement", function(req, res){
+    const Element = {
+        Reactivo: req.body.reactivo,
+        Cantidad: req.body.cantidad.toString(),
+        Forma: req.body.forma
+    }
+
+    MongoClient.connect(db.url, db.config, function(fail, client){
+        if(!fail){
+            const newElement = client.db('Farmacia').collection('Reactivos');
+            newElement.insertOne(Element, function(fail, newElement){
+                res.render("newElement",{
+                    listaReactivos: newElement,
+                    mensaje: "Reactivo Agregado"
+                })
+            })
+        } else {
+            res.render("fail", {
+                mensajeError: "Error en la carga de Datos"
+            })
+        }
+    })
+})
+
 app.listen(5400, function(){
-    console.log("Sigo agregando cosas locas al puerto 5400. Ya perdi la fé con el profesor");
+    console.log("Ya va el 60% del proyecto. Y yo sola me complico las cosas.");
 });

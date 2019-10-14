@@ -13,14 +13,24 @@
      
     </tr>
   </thead>
+  {{#if listaReactivos.length}}
+
+  {{#each listaReactivos}}
   <tbody>
     <tr class="table-active">
-      <script id="template" type="text/x-handlebars-template">
       <td>{{this.Reactivo}}</td>
       <td>{{this.Cantidad}}</td>
       <td>{{this.Forma}}</td>
-      </script>
     </tr>
   </tbody>
+  {{/each}}
+
+  {{else}}
+
+    <h4>No se encuentran los datos</h4>
+  
+  {{/if}}
+
+
 </table>
 </div>

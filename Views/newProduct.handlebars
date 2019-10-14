@@ -1,17 +1,21 @@
-<form>
+{{#if mensaje}}
+  <div class="success">{{mensaje}}</div>
+{{/if}}
+
+<form class="new" action="/newProduct" method="POST">
   <fieldset>
     <legend>Nuevo Producto</legend>
     <div class="form-group">
       <label for="nombre">Nombre</label>
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" name="nombre" id="nombre" required>
     </div>
     <div class="form-group">
       <label for="cantidad">Cantidad</label>
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" name="cantidad" id="cantidad" required>
     </div>
     <div class="form-group">
       <label for="forma">Forma Farmacologica</label>
-      <select class="custom-select">
+      <select class="custom-select" name="forma" id="forma" required>
         <option selected="">Elegir</option>
         <option>Jarabe/Liquido</option>
         <option>Crema/Emulsión</option>
@@ -19,6 +23,7 @@
       </select>
     </div>
   </fieldset>
-  <button type="submit" class="btn" id="insColor">Guardar</button>
+  <button type="submit" class="btn btn-info" id="insColor">Guardar</button>
+  <a type="submit" class="btn btn-link" id="insColor" href="products">Cerrar</a> 
 </form>
 

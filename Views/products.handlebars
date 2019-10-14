@@ -13,13 +13,22 @@
       <th scope="col">Forma</th>
       </tr>
     </thead>
+    {{#if listaProductos.length}}
+
+    {{#each listaProductos}} 
     <tbody>
       <tr class="table-active">
-      <th scope="row">{{this.Nombre}}</th>
+      <th>{{this.Nombre}}</th>
       <td>{{this.Cantidad}}</td>
       <td>{{this.Forma}}</td>
       </tr>
     </tbody>
+    {{/each}}
+
+    {{else}}
+      <h3>No se encuentran los datos</h3>
+    {{/if}}
+
   </table> 
   </div>
 </article>

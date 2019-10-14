@@ -1,16 +1,13 @@
-Pantalla de Login:
-    * Error de servidor ante login
 Home:
     *Reubicar div de user y logout.
-    *Cambiar los iconos de los botones
-Elements:
-    *No responde ante llamado desde Server
+New Elements:
     *No aparecen los datos en la tabla
-    *Estilado
-Products:
+    *Error ante agregado. No redirige a la tabla de inicio
+New Products:
     *No aparecen los datos en la tabla
-    *Estilado
+    *No redirige a la tabla de inicio
 Recipes:
-    *No aparece vista de error
-    *No hace busqueda
-    
+    *Aparecen datos por default
+    *Hace busqueda, pero erratica
+
+Pantalla de login, home, elements y products hacen lo necesario.
