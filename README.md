@@ -11,8 +11,6 @@ Con esa premisa, diseñe Pharma Kitchen como una aplicación web que se podria u
 Pharma Kitchen permite visualizar los reactivos disponibles y la cantidad que se posee, además de poner ingresar nuevos ingresos. 
 Tambien permite llevar el inventario de productos y las bajas. Además posee un apartado de recetas magistrales que, mediante un buscador, devuelve la receta, el procedimiento y los reactivos a usar, indicando si hay stock de estos o no.
 
-![] {https://giphy.com/gifs/xT8qAZ9GQURUiB4IN2/html5}
-
 ### Instalación
 Para poder correr este programa necesitamos instalar las siguientes librerias:
 * _Express_
