@@ -11,7 +11,7 @@ Con esa premisa, diseñe Pharma Kitchen como una aplicación web que se podria u
 Pharma Kitchen permite visualizar los reactivos disponibles y la cantidad que se posee, además de poner ingresar nuevos ingresos. 
 Tambien permite llevar el inventario de productos y las bajas. Además posee un apartado de recetas magistrales que, mediante un buscador, devuelve la receta, el procedimiento y los reactivos a usar, indicando si hay stock de estos o no.
 
-### Instalación
+## Instalación
 Para poder correr este programa necesitamos instalar las siguientes librerias:
 * _Express_
  ```
@@ -31,20 +31,20 @@ Para poder correr este programa necesitamos instalar las siguientes librerias:
  ```
  Linkea el motor de Base de Datos MongoDB con Node.JS. Para su uso se instala con --npm install mongodb--
  ```
-*_Bootswatch_
+* _Bootswatch_
 ```
 Libreria gratuita de Bootstrap usada para darle estilo a la página. Se instala con --npm install bootswatch-- y se requiere bajar el archivo css desde la página de Bootswatch.
 ```
 
-#### Construido con las siguientes herramientas
+### Construido con las siguientes herramientas
 
-*[Node.JS](https://nodejs.org/es/)
-*[NPM](https://www.npmjs.com/)
-*[MongoDB](https://www.mongodb.com/es)
-*[Bootswatch](https://bootswatch.com/united)
-*[Visual Studio Code]
+* [Node.JS](https://nodejs.org/es/)
+* [NPM](https://www.npmjs.com/)
+* [MongoDB](https://www.mongodb.com/es)
+* [Bootswatch](https://bootswatch.com/united)
+* [Visual Studio Code](https://code.visualstudio.com/)
 
-##### Autores
+## Autores
 
 Proyecto diseñado, armado y programado en un 99% por Ayelen Ferreyra.
 Datos obtenidos de la Farmacopea Argentina y de Guias de Trabajos Prácticos de la carrera de Farmacia, FFYB, UBA.
