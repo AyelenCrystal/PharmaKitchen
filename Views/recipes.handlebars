@@ -1,15 +1,17 @@
-
+<!--Buscador de recetas, traidas desde la base de datos de MongoDB-->
 <article id="search">
-    <form>
+    <form action="recipes" method="get">
         <div class="form-group">
-            <label for="formGroup" style="margin-botton: 10px;"><h3>Busca entre cientos de Recetas Magistrales y Sintesis Quimicas</h3>            </label>
-            <input type="text" class="form-control" id="formGroup" placeholder="Buscador" style="margin-bottom: 10px;" name="recetas">
-            <button type="button" class="btn btn-info" id="insColor" style="margin-top: 15px;" onclick="Search()">Buscar</button>
+            <label for="formGroup"><h2 style="margin-bottom: 20px;">Busca entre cientos de Recetas Magistrales y Sintesis Quimicas</h2></label>
+            <input type="search" class="form-control" id="formGroup" placeholder="Buscador" style="margin-bottom: 10px;" name="recetas">
+            <input type="submit" class="btn btn-info" id="insColor" style="margin-top: 15px;" onclick="Search()"></button>
         </div>
     </form>
 
-    {{#if listaRecetas.length}}
- 
+    {{#if mensajeError}}
+    <h3>{{mensajeError}}</h3>
+    {{else}}
+
     {{#each listaRecetas}}
         <div class="jumbotron" id="Recetario">
             <h2>Nombre:  {{this.Nombre}}</h2>
@@ -27,18 +29,14 @@
         </div>
     {{/each}}
     
-    {{else}}
-     
-     <h1>No se encuentra la receta.</h1>
-
     {{/if}}
 
     <script>
         function Search() {
             let url = "/recipes?"
-            let recetas = document.getElementById("recetas").value;
+            let recipe = document.getElementById("recetas").value;
 
-            if (recetas){
+            if (recipe){
                 url += "recetas" + recetas;
             }
             location = url;

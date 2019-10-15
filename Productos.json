@@ -1,0 +1,5 @@
+{"_id":{"$oid":"5d9d1f77bd5e7b1e5078ede2"},"Nombre":"Poción de Todd","Cantidad":"50 ml","Forma":"Jarabe/Liquido"}
+{"_id":{"$oid":"5da4b78d5f32c63a6471744d"},"Nombre":"Tobramicina","Cantidad":"40 ml","Forma":"Gotas nasales/ópticas"}
+{"_id":{"$oid":"5da50155972eae3d483d497e"},"Nombre":"Solución de Glucos Hipertónica","Cantidad":"150 ml","Forma":"Jarabe/Liquido"}
+{"_id":{"$oid":"5da55103972eae3d483d4980"},"Nombre":"N-Acetilcisteína","Cantidad":"25 ml","Forma":"Jarabe/Liquido"}
+{"_id":{"$oid":"5da5514c972eae3d483d4981"},"Nombre":"Morfina","Cantidad":"250 ml","Forma":"Jarabe/Liquido"}

@@ -9,6 +9,7 @@
     <title>{{{title}}}</title>
 </head>
 <body>
+    <!--Layout Principal, con navbar y footer-->
     <header>
         <nav class="navbar navbar-expand-lg" id="insColor" >
         <a class="navbar-brand" href="home"><img src="logotipo2.png"/></a>
@@ -17,10 +18,10 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    {{#if mensaje}}
-                    <p class="mensaje-{{tipo}}">Bienvenido {{user}}</p>
+           <ul class="navbar-nav ml-auto">
+                <li class="nav-item" id="item">
+                    {{#if user}}
+                    <p class="mensaje-{{tipo}}">Bienvenido {{this.user}}</p>
                     <a class="logout" href="logout">Logout</a>
                     {{/if}}
                 </li>

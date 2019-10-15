@@ -34,7 +34,7 @@
 } 
 
 .data {
-    padding: 30px 20px;
+    padding: 35px 20px;
 }
 
 .reference {
@@ -61,7 +61,14 @@ a:hover {
 }
 
 .logout {
-    color: black;
+    color: white;
+}
+
+#item{
+    text-align: end;
+    font-size: 16px;
+    color: white;
+    margin-right: 10px; 
 }
 
 .card-title {
@@ -91,10 +98,10 @@ section {
 }
 
 #search {
-    margin-top: 40px;
+    margin-top: 73px;
     margin-left: 70px;
     margin-right: 70px;
-    margin-bottom: 40px;
+    margin-bottom: 125px;
 }
 
 .t {
@@ -113,4 +120,16 @@ section {
 
 .btn-link {
     color:white;
+}
+
+.btn-info{
+    color: white;
+}
+
+.success {
+    margin-left: 30px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: larger;
+    color: green;
 }

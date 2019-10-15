@@ -1,35 +1,35 @@
-<article>
-  <div class="t">
-    <h4><strong>Inventario de Productos</strong></h4>
-    <p>Controla los productos realizados, su cantidad y presentación farmacologica.</p>
-    <a href="newProduct"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#miModal" id="insColor" style="">Agregar Producto</button></a>
-  </div>
-  <div class="t">
-  <table class="table table-hover">
-    <thead class="thead" id="insColor"> 
+<!--Tabla de productos, donde se visualiza los productos nuevos y precargados-->
+<div class="t">
+  <h4><strong>Inventario de Productos</strong></h4>
+  <p>Controla los productos realizados, su cantidad y presentación farmacologica.</p>
+  <a href="newProduct"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#miModal" id="insColor" style="">Agregar Producto</button></a>
+</div>
+<div class="t">
+<table class="table table-hover">
+  <thead class="thead" id="insColor"> 
       <tr>
       <th scope="col">Producto</th>
       <th scope="col">Cantidad</th>
       <th scope="col">Forma</th>
       </tr>
-    </thead>
-    {{#if listaProductos.length}}
+  </thead>
+  {{#if listaProductos.length}}
 
-    {{#each listaProductos}} 
-    <tbody>
-      <tr class="table-active">
-      <th>{{this.Nombre}}</th>
-      <td>{{this.Cantidad}}</td>
-      <td>{{this.Forma}}</td>
-      </tr>
-    </tbody>
-    {{/each}}
+  {{#each listaProductos}} 
+  <tbody>
+    <tr class="table-active">
+    <td>{{this.Nombre}}</td>
+    <td>{{this.Cantidad}}</td>
+    <td>{{this.Forma}}</td>
+    </tr>
+  </tbody>
+  {{/each}}
 
-    {{else}}
-      <h3>No se encuentran los datos</h3>
-    {{/if}}
+  {{else}}
+    <h3>No se encuentran los datos</h3>
+  {{/if}}
 
-  </table> 
-  </div>
-</article>
+</table> 
+</div>
+
 

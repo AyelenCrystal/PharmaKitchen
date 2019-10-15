@@ -1,1 +1,5 @@
 {"_id":{"$oid":"5d9bd87ab828aa0408cf28b2"},"Reactivo":"Canela tintura","Cantidad":"15 ml","Forma":"Liquido"}
+{"_id":{"$oid":"5da3fa549bcb5d4768f9e1fc"},"Reactivo":"Agua Destilada","Cantidad":"300 ml","Forma":"Liquido"}
+{"_id":{"$oid":"5da4b7625f32c63a6471744c"},"Reactivo":"Amoniaco","Cantidad":"230 ml","Forma":"Liquido"}
+{"_id":{"$oid":"5da4bb8d5f32c63a6471744e"},"Reactivo":"Cloruro de Sodio","Cantidad":"250 g","Forma":"Polvo/Sólido"}
+{"_id":{"$oid":"5da500a6972eae3d483d497d"},"Reactivo":"Glucosa","Cantidad":"30 gr","Forma":"Polvo/Sólido"}
