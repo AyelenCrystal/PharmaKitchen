@@ -14,11 +14,17 @@
 
     {{#each listaRecetas}}
         <div class="jumbotron" id="Recetario">
-            <h2>Nombre:  {{this.Nombre}}</h2>
+            <h2>{{this.Nombre}}</h2>
             <ul>
-                <li>Reactivos:  {{this.Reactivos}}</li>
+                <li>Reactivos:
+                    <ul>
+                        {{#each this.Reactivos}}
+                        <li>{{this}} </li>
+                        {{/each}}
+                    </ul>  
+                </li>
                 <li>Material:  {{this.Material}}</li>
-                <li> Procedimiento:
+                <li>Procedimiento:
                     <ol>
                          {{#each this.Procedimiento}}
                             <li>{{this}}</li>

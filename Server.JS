@@ -197,7 +197,7 @@ app.get("/elements", function(req, res){
         if(!fail) {
             const elements = client.db('Farmacia').collection('Reactivos');
 
-            elements.find().toArray((fail, elements) =>{
+            elements.find().sort({Reactivo:1}).toArray((fail, elements) =>{
                 client.close();
                 res.render ("elements", {
                     user: req.session.user,
@@ -220,7 +220,7 @@ app.get("/products", function(req, res){
         if(!fail){
             const products = client.db('Farmacia').collection('Productos');
 
-            products.find().toArray((fail, products)=>{
+            products.find().sort({Nombre: 1}).toArray((fail, products)=>{
                 res.render("products",{
                     user: req.session.user,
                     listaProductos: products,
@@ -310,5 +310,5 @@ app.post("/newElement", function(req, res){
 
 //Llamado al servidor
 app.listen(8379, function(){
-    console.log("There must be more in life than stereotypes. This application is born from a stereotype, so let it run.");
+    console.log("Running Local Host 8379");
 });
