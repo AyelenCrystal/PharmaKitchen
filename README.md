@@ -35,6 +35,12 @@ Para poder correr este programa necesitamos instalar las siguientes librerias:
 ```
 Libreria gratuita de Bootstrap usada para darle estilo a la página. Se instala con --npm install bootswatch-- y se requiere bajar el archivo css desde la página de Bootswatch.
 ```
+Además se debe cargar en MongoDB los JSON correspondientes a las colecciones (Productos.json, Reactivos.json y Recetas.json) de la base de datos (Farmacia)
+
+```
+mongoimport --dbName= Farmacia --collection= Productos, Reactivos y/o Recetas --file= Productos.json, Reactivos.json y Recetas.json
+```
+A efectos de probar el programa facilmente, se puede usar como usuario: admin y contraseña: admin. 
 
 ### Construido con las siguientes herramientas
 
@@ -43,6 +49,8 @@ Libreria gratuita de Bootstrap usada para darle estilo a la página. Se instala 
 * [MongoDB](https://www.mongodb.com/es)
 * [Bootswatch](https://bootswatch.com/united)
 * [Visual Studio Code](https://code.visualstudio.com/)
+
+
 
 ## Autores
 
